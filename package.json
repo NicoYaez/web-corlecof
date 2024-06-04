@@ -1,0 +1,39 @@
+{
+  "name": "web-corlecof",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 8570",
+    "build": "next build",
+    "start": "next start -p 8570",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.4.0",
+    "@fortawesome/free-solid-svg-icons": "^6.4.0",
+    "@fortawesome/react-fontawesome": "^0.2.0",
+    "@react-google-maps/api": "^2.18.1",
+    "@tailwindcss/forms": "^0.5.3",
+    "autoprefixer": "^10.4.14",
+    "axios": "^1.4.0",
+    "chart.js": "^2.9.4",
+    "dotenv": "^16.1.3",
+    "jose": "^4.14.4",
+    "js-cookie": "^3.0.5",
+    "jsonwebtoken": "^9.0.0",
+    "moment": "^2.29.4",
+    "next": "^13.4.4",
+    "nookies": "^2.5.2",
+    "postcss": "^8.4.24",
+    "react": "18.2.0",
+    "react-datepicker": "^4.13.0",
+    "react-dom": "18.2.0",
+    "react-icons": "^4.9.0",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "eslint": "8.41.0",
+    "eslint-config-next": "13.4.4",
+    "tailwindcss": "^3.3.2"
+  }
+}
