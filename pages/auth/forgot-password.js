@@ -34,7 +34,7 @@ const RequestPasswordResetPage = () => {
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
           <img
             className="mx-auto h-20 w-auto"
-            src="images/logo.png"
+            src="/images/logo.png"
             alt="Logo"
           />
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
