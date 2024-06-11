@@ -35,7 +35,12 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 probando git
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 probando git x2
 =======
 >>>>>>> 26edb8d (intento de Commit)
+=======
+
+probando git x2
+>>>>>>> 5d0a39f (commit 2)
