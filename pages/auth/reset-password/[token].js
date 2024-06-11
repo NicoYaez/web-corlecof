@@ -64,7 +64,7 @@ const ResetPasswordPage = (token) => {
         <>
             <div className="min-h-screen bg-gray-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
                 <Head>
-                    <title>Restablecer contraseña | AgroHeladas</title>
+                    <title>Restablecer contraseña | CORLECOF</title>
                 </Head>
 
                 <div className="sm:mx-auto sm:w-full sm:max-w-md">
