@@ -1,4 +1,4 @@
-class SportsWorkShop {
+export default class SportsWorkShop {
     #profesional;
     #startTime;
     #endTime;

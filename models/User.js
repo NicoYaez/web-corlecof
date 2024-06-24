@@ -1,35 +1,54 @@
-class User {
+export default class User {
     #rut;
     #name;
     #email;
+    #lastName;
+    #middleName;
+    
 
-    constructor(rut = '', name = '', email = '') {
+    constructor(rut = '', name = '', lastName='', middleName='', email = '') {
         this.#rut = rut;
         this.#name = name;
+        this.#lastName = lastName;
+        this.#middleName = middleName;
         this.#email = email;
     }
 
-    get rut() {
+    getRut() {
         return this.#rut;
     }
 
-    set rut(value) {
+    setRut(value) {
         this.#rut = value;
     }
 
-    get name() {
+    getName() {
         return this.#name;
     }
 
-    set name(value) {
+    setName(value) {
         this.#name = value;
     }
+    getLastName() {
+        return this.#lastName;
+    }
 
-    get email() {
+    setLastName(value) {
+        this.#lastName = value;
+    }
+    getMiddleName() {
+        return this.#middleName;
+    }
+
+    setMiddleName(value) {
+        this.#lastName = value;
+    }
+
+    getEmail() {
         return this.#email;
     }
 
-    set email(value) {
+    setEmail(value) {
         this.#email = value;
     }
 }

@@ -1,11 +1,13 @@
-class MedicalAppointment {
+export default class MedicalAppointment {
     #profesional;
     #pacient;
     #asistance;
     #appointmentDate;
     #appointmentTime;
     #status;
-    constructor(profesional, pacient, status, asistance, appointmentDate, appointmentTime){
+    #id;
+    constructor(id, profesional, pacient, status, asistance, appointmentDate, appointmentTime){
+        this.#id = id;
         this.#profesional = profesional;
         this.#pacient = pacient;
         this.#status = status;
@@ -15,6 +17,10 @@ class MedicalAppointment {
     }
 
     // Getters
+
+    getId() {
+        return this.#id;
+    }
     getProfesional() {
         return this.#profesional;
     }
@@ -36,10 +42,19 @@ class MedicalAppointment {
     }
 
     getAppointmentTime() {
+        // Si #appointmentTime es un objeto Date, formatea para obtener solo la hora y minutos
+        if (this.#appointmentTime instanceof Date) {
+            return this.#appointmentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        }
+        // Si ya está en el formato deseado o es una cadena, devuélvelo directamente
         return this.#appointmentTime;
     }
 
     // Setters
+    setId(id) {
+        this.#id = id;
+    }
+
     setProfesional(profesional) {
         this.#profesional = profesional;
     }
