@@ -1,18 +1,29 @@
-class Profesional extends User {
-    #speciality;
+import User from './User.js';
 
-    constructor(usuario, speciality) {
-        super(usuario.rut, usuario.name, usuario.email);
+export default class Profesional extends User {
+    #speciality;
+    #appointments;
+
+    constructor(rut, name, email, lastName, middleName, speciality = null) {
+        super(rut, name, email, lastName, middleName);
         this.#speciality = speciality;
+        this.#appointments = [];
+
     }
 
     // Getter
-    get speciality() {
+    getSpeciality() {
         return this.#speciality;
+    }
+    getAppointment() {
+        return this.#appointments;
     }
 
     // Setter
-    set speciality(value) {
+    setSpeciality(value) {
         this.#speciality = value;
+    }
+    setAppointment(value) {
+        this.#appointments.push(value);
     }
 }
