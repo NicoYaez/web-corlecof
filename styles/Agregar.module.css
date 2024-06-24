@@ -1,0 +1,87 @@
+/* ../styles/Agregar.module.css */
+
+.container {
+    background-color: #3498db; /* Color de fondo azul */
+    padding: 20px;
+    border-radius: 8px;
+    color: #fff; /* Texto blanco */
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.title {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.info {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.userList {
+    list-style: none;
+    padding: 0;
+}
+
+.userListItem {
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.addButton,
+.removeButton,
+.submitButton,
+.confirmButton {
+    background-color: #ffffff; /* Color de fondo blanco para botones */
+    color: #3498db; /* Texto azul */
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.addButton:hover,
+.removeButton:hover,
+.submitButton:hover,
+.confirmButton:hover {
+    background-color: #f0f0f0; /* Color de fondo gris claro al hacer hover */
+}
+
+.participantInput {
+    width: calc(100% - 24px); /* Ajustar el ancho para que no se superponga con los botones */
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #333; /* Texto gris oscuro */
+}
+
+.participantInput:focus {
+    outline: none;
+    border-color: #3498db; /* Color de borde azul al tener foco */
+}
+
+.submitButton {
+    margin-right: 10px;
+}
+
+.confirmButton {
+    background-color: #27ae60; /* Color de fondo verde para confirmar */
+    color: #fff; /* Texto blanco */
+}
+
+.confirmButton:hover {
+    background-color: #219e54; /* Color de fondo verde más oscuro al hacer hover */
+}
+
+.addButton,
+.removeButton {
+    flex-shrink: 0;
+    margin-left: 10px;
+}
