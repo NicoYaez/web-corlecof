@@ -1,0 +1,70 @@
+/* ListTalleres.module.css */
+
+.container {
+    background-color: #e0f7fa; /* Fondo celeste */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.list {
+    width: 100%;
+    max-width: 800px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.listItem {
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+.listItem h2 {
+    margin-top: 0;
+    color: #333;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.listItem p {
+    margin: 5px 0;
+    color: #555;
+}
+
+.buttonContainer {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.button {
+    background-color: #4CAF50; /* Color verde */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+    text-align: center;
+}
+
+.button:hover {
+    background-color: #45a049; /* Color al pasar el mouse */
+}
+
+.button.edit {
+    background-color: #007BFF; /* Color azul */
+}
+
+.button.edit:hover {
+    background-color: #0056b3; /* Azul oscuro al pasar el mouse */
+}

@@ -1,0 +1,98 @@
+/* Añadido para el fondo de la página */
+.container {
+  background-color: #e0f7fa; /* Azul celeste suave */
+  min-height: 100vh; /* Para asegurar que cubre toda la altura de la ventana */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  background-color: #ffffff; /* Fondo blanco para el formulario */
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  width: 150%;
+  max-width: 2000px; /* Aumenta el ancho máximo */
+}
+
+.input,
+.textarea {
+  width: 100%;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.textarea {
+  resize: vertical;
+}
+
+.button {
+  background-color: #4CAF50; /* Color verde para el botón */
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #45a049; /* Color al pasar el mouse */
+}
+
+.title {
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 2em; /* Aumenta el tamaño de la fuente */
+  font-weight: bold; /* Aumenta el grosor de la fuente */
+}
+
+.label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.input[type="text"],
+.input[type="datetime-local"],
+.input[type="number"],
+.input[type="date"] {
+  background-color: #f0f0f0; /* Fondo suave para entradas */
+}
+
+.textarea {
+  background-color: #f0f0f0; /* Fondo suave para textarea */
+}
+
+@media (max-width: 600px) {
+  .form {
+    padding: 20px;
+  }
+
+  .input,
+  .textarea {
+    padding: 10px;
+  }
+
+  .button {
+    padding: 10px 20px;
+  }
+}
