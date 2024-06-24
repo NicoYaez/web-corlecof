@@ -1,5 +1,8 @@
+import User from './User.js';
+
+
 class Secretary extends User {
-    constructor(usuario){
-        super(usuario.rut, usuario.name, usuario.email);
+    constructor(user){
+        super(user.rut, user.name, user.email, user.lastName, user.middleName);
     }
 }
