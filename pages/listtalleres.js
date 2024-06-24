@@ -23,6 +23,15 @@ const ListTalleres = () => {
         fetchTalleres();
     }, []);
 
+    const handleDelete = async (id) => {
+        try {
+            await axios.delete(`${api}/taller/delete/${id}`);
+            setTalleres(talleres.filter(taller => taller._id !== id));
+        } catch (error) {
+            console.error('Error deleting taller:', error);
+        }
+    };
+
     if (loading) {
         return <div>Cargando talleres...</div>;
     }
@@ -48,7 +57,10 @@ const ListTalleres = () => {
                             <Link legacyBehavior href={`/editar-taller/${taller._id}`}>
                                 <a>Editar Taller</a>
                             </Link>
-                            <button className={styles.button}>Agregar Alumno</button>
+                            <Link legacyBehavior href={`/agregar?tallerId=${taller._id}`}>
+                                <a className={styles.button}>Agregar Alumno</a>
+                            </Link>
+                            <button onClick={() => handleDelete(taller._id)} className={styles.deleteButton}>Eliminar Taller</button>
                         </div>
                     </li>
                 ))}
