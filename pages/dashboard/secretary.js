@@ -5,13 +5,30 @@ import FormPatient from "@/components/formPatient";
 import Patient from "@/models/Patient";
 import MedicalAppointment from "@/models/MedicalAppointment";
 import ScheduleAppointment from "@/components/scheduleAppointment";
+import axios from 'axios';
 
 const Secretary = () => {
+  const api = process.env.NEXT_PUBLIC_API_LINK;
+
   const [currentView, setCurrentView] = useState('appointments'); // State to control the current view
-  const [patients, setPatients] = useState([new Patient('A','B','C','D','E')]); // State to store patients
+  const [patients, setPatients] = useState([]); // State to store patients
   const [showForm, setShowForm] = useState(false); // State to control form visibility
-  const [appointments, setAppointments] = useState([new MedicalAppointment(1,'',patients[0],'no','no','12','12')]); // State to store appointments
+  const [appointments, setAppointments] = useState([new MedicalAppointment(1, '', patients[0], 'no', 'no', '12', '12')]); // State to store appointments
   const [profesional, setProfesional] = useState([]); // State to store profesional
+
+  useEffect(() => {
+    axios.get(`${api}/paciente/list`)
+      .then(response => {
+        // Asume que la respuesta es un array de pacientes
+        setPatients(response.data.map(patientData => new Patient(patientData)));
+        console.log(patientData);
+      })
+      .catch(error => {
+        console.error("There was an error fetching the patients:", error);
+      });
+
+  }, []); // El array vacío asegura que esto se ejecute solo una vez al montar el componente
+
   const changeView = (view) => {
     setCurrentView(view);
     setShowForm(false);
@@ -21,7 +38,6 @@ const Secretary = () => {
     setPatients([...patients, newPatient]);
     setShowForm(false);
   };
-  
 
   const toggleForm = () => {
     setShowForm(!showForm);
