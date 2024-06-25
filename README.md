@@ -33,7 +33,13 @@ Abre [http://localhost:3000](http://localhost:3000) en tu navegador para ver la 
 
 Para el backend, utiliza la API disponible en:
 
-`https://github.com/NicoYaez/api-corlecof`
+[https://github.com/NicoYaez/api-corlecof](https://github.com/NicoYaez/api-corlecof)
+
+## EQUIPO DE DESARROLLO
+
+- https://github.com/NicoYaez
+- https://github.com/acorreap
+- https://github.com/Avidalfort
 
 ## Rutas Web
 
