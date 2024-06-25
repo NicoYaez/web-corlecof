@@ -129,37 +129,37 @@ const AgregarCita = () => {
             {mensajeError && <p className="text-red-500 mb-4">{mensajeError}</p>}
             <div className="flex flex-wrap mb-4">
                 <button
-                    className="bg-blue-500 text-white px-4 py-2 rounded mr-2 mb-2"
+                    className="py-2 px-3 leading-tight bg-white border border-gray-200 text-blue-700 border-r-0 ml-0 rounded-l hover:bg-indigo-500 hover:text-white"
                     onClick={() => handleFilterByEspecialidad('Medico')}
                 >
                     Medico
                 </button>
                 <button
-                    className="bg-blue-500 text-white px-4 py-2 rounded mr-2 mb-2"
+                    className="py-2 px-3 leading-tight bg-white border border-gray-200 text-blue-700 border-r-0 ml-0 rounded-l hover:bg-indigo-500 hover:text-white"
                     onClick={() => handleFilterByEspecialidad('Kinesiologo')}
                 >
                     Kinesiologo
                 </button>
                 <button
-                    className="bg-blue-500 text-white px-4 py-2 rounded mr-2 mb-2"
+                    className="py-2 px-3 leading-tight bg-white border border-gray-200 text-blue-700 border-r-0 ml-0 rounded-l hover:bg-indigo-500 hover:text-white"
                     onClick={() => handleFilterByEspecialidad('Nutricionista')}
                 >
                     Nutricionista
                 </button>
                 <button
-                    className="bg-blue-500 text-white px-4 py-2 rounded mr-2 mb-2"
+                    className="py-2 px-3 leading-tight bg-white border border-gray-200 text-blue-700 border-r-0 ml-0 rounded-l hover:bg-indigo-500 hover:text-white"
                     onClick={() => handleFilterByEspecialidad('Profesor')}
                 >
                     Profesor
                 </button>
                 <button
-                    className="bg-blue-500 text-white px-4 py-2 rounded mr-2 mb-2"
+                    className="py-2 px-3 leading-tight bg-white border border-gray-200 text-blue-700 border-r-0 ml-0 rounded-l hover:bg-indigo-500 hover:text-white"
                     onClick={() => handleFilterByEspecialidad('Psicologo')}
                 >
                     Psicologo
                 </button>
                 <button
-                    className="bg-gray-500 text-white px-4 py-2 rounded mr-2 mb-2"
+                    className="py-2 px-3 leading-tight bg-white border border-gray-200 text-blue-700 border-lr-0 ml-0 rounded-l hover:bg-indigo-500 hover:text-white"
                     onClick={() => fetchProfesionales()}
                 >
                     Mostrar Todos
@@ -219,7 +219,7 @@ const AgregarCita = () => {
                         ))}
                     </select>
                 </div>
-                <button type="submit" className="w-full bg-green-500 text-white px-4 py-2 rounded">
+                <button type="submit" className="w-full px-6 py-3 bg-green-600 rounded-md text-white font-medium tracking-wide hover:bg-green-500 ml-3">
                     Crear Cita Médica
                 </button>
             </form>

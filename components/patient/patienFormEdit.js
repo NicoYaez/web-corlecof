@@ -47,7 +47,7 @@ const EditPatientModal = ({ onClose, patient }) => {
     <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full" id="my-modal">
       <div className="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
         <div className="mt-3 text-center">
-          <h3 className="text-lg leading-6 font-medium text-gray-900">Editar Paciente</h3>
+          <h3 className="text-lg text-gray-700 font-semibold capitalize">Editar Paciente</h3>
           <div className="mt-2">
             <button onClick={onClose} className="absolute top-0 right-0 m-4 text-black">
               <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -57,11 +57,11 @@ const EditPatientModal = ({ onClose, patient }) => {
           </div>
         </div>
         <form onSubmit={handleSubmit} className="mt-4">
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="rut">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-4">
+            <label className="text-gray-700" htmlFor="rut">
               Rut:
               <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="form-input w-full mt-2 rounded-md focus:border-indigo-600"
                 type="text"
                 name="rut"
                 id="rut"
@@ -70,10 +70,10 @@ const EditPatientModal = ({ onClose, patient }) => {
                 required
               />
             </label>
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="nombre">
+            <label className="text-gray-700" htmlFor="nombre">
               Nombre:
               <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="form-input w-full mt-2 rounded-md focus:border-indigo-600"
                 type="text"
                 name="nombre"
                 id="nombre"
@@ -82,10 +82,10 @@ const EditPatientModal = ({ onClose, patient }) => {
                 required
               />
             </label>
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="apellidoPaterno">
+            <label className="text-gray-700" htmlFor="apellidoPaterno">
               Apellido Paterno:
               <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="form-input w-full mt-2 rounded-md focus:border-indigo-600"
                 type="text"
                 name="apellidoPaterno"
                 id="apellidoPaterno"
@@ -94,10 +94,10 @@ const EditPatientModal = ({ onClose, patient }) => {
                 required
               />
             </label>
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="apellidoMaterno">
+            <label className="text-gray-700" htmlFor="apellidoMaterno">
               Apellido Materno:
               <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="form-input w-full mt-2 rounded-md focus:border-indigo-600"
                 type="text"
                 name="apellidoMaterno"
                 id="apellidoMaterno"
@@ -106,10 +106,10 @@ const EditPatientModal = ({ onClose, patient }) => {
                 required
               />
             </label>
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+            <label className="text-gray-700" htmlFor="email">
               Email:
               <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="form-input w-full mt-2 rounded-md focus:border-indigo-600"
                 type="text"
                 name="email"
                 id="email"
@@ -119,12 +119,9 @@ const EditPatientModal = ({ onClose, patient }) => {
               />
             </label>
           </div>
-          <div className="flex justify-end">
-            <button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+          <div className="flex justify-end mt-4">
+            <button type="submit" className="px-4 py-2 bg-gray-800 text-gray-200 rounded-md hover:bg-gray-700 focus:outline-none focus:bg-gray-700">
               Guardar Cambios
-            </button>
-            <button onClick={onClose} type="button" className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded ml-2 focus:outline-none focus:shadow-outline">
-              Cancelar
             </button>
           </div>
         </form>
