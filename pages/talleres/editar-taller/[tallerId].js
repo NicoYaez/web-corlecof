@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
-import styles from '../styles/Taller.module.css';
+import styles from '../../../styles/EditTaller.module.css'; // Importa los estilos CSS
 
-const CreateTaller = () => {
+const EditTaller = () => {
     const api = process.env.NEXT_PUBLIC_API_LINK;
     const router = useRouter();
+    const { tallerId } = router.query;
+    const [taller, setTaller] = useState(null);
+    const [loading, setLoading] = useState(true);
     const [form, setForm] = useState({
         profesional: '',
         startTime: '',
@@ -17,10 +20,32 @@ const CreateTaller = () => {
         type: '',
         maxParticipants: ''
     });
-    const [message, setMessage] = useState('');
     const [profesionales, setProfesionales] = useState([]);
 
     useEffect(() => {
+        const fetchTaller = async () => {
+            setLoading(true); // Indicar que se está cargando el taller
+            try {
+                const res = await axios.get(`${api}/taller/${tallerId}`);
+                setTaller(res.data);
+                setForm({
+                    profesional: res.data.profesional || '',
+                    startTime: res.data.startTime?.slice(0, 16) || '', // Asegurarse de que se maneje el formato de fecha según sea necesario
+                    endTime: res.data.endTime?.slice(0, 16) || '', // Asegurarse de que se maneje el formato de fecha según sea necesario
+                    duration: res.data.duration || '',
+                    participants: res.data.participants.map(participant => participant._id),
+                    name: res.data.name || '',
+                    description: res.data.description || '',
+                    type: res.data.type || '',
+                    maxParticipants: res.data.maxParticipants || ''
+                });
+                setLoading(false); // Indicar que se ha completado la carga del taller
+            } catch (error) {
+                console.error('Error fetching taller:', error);
+                setLoading(false); // Asegurarse de que se actualice el estado de carga en caso de error
+            }
+        };
+
         const fetchProfesionales = async () => {
             try {
                 const response = await axios.get(`${api}/user/list/profesionales/Profesor`);
@@ -30,40 +55,54 @@ const CreateTaller = () => {
             }
         };
 
-        fetchProfesionales();
-    }, []);
+        if (tallerId) {
+            fetchTaller();
+        }
+
+        fetchProfesionales(); // Obtener la lista de profesionales al cargar el componente
+    }, [api, tallerId]);
 
     const handleChange = (e) => {
-        setForm({
-            ...form,
-            [e.target.name]: e.target.value
-        });
+        const { name, value } = e.target;
+        setForm(prevForm => ({
+            ...prevForm,
+            [name]: value
+        }));
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        // Verificar si el taller se ha cargado correctamente
+        if (!taller) {
+            console.error('No se ha cargado el taller.');
+            return;
+        }
+
         try {
-            const res = await axios.post(`${api}/taller/register`, form);
-
-            if (res.status !== 200) {
-                throw new Error('Error al crear el taller');
-            }
-
-            const data = res.data;
-            console.log('Taller creado:', data);
-            setMessage('Taller creado correctamente');
-
-            router.push('/listtalleres');
+            const res = await axios.put(`${api}/taller/${tallerId}`, form);
+            console.log('Taller actualizado:', res.data);
+            router.push('/talleres/list-talleres'); // Redirigir a listtalleres.js después de la actualización
         } catch (error) {
-            console.error(error.message);
-            setMessage('Error al crear el taller');
+            if (error.response) {
+                console.error('Error de servidor:', error.response.status, error.response.data);
+            } else if (error.request) {
+                console.error('No se recibió respuesta del servidor:', error.request);
+            } else {
+                console.error('Error al configurar la solicitud:', error.message);
+            }
+            // Manejar el estado de error o mostrar un mensaje amigable al usuario
         }
     };
 
+    if (loading) {
+        return <div>Cargando taller...</div>;
+    }
+
     return (
-        <div className={styles.formContainer}>
-            <h1 className={styles.title}>Crear Taller</h1>
+        <div className={styles.container}>
             <form className={styles.form} onSubmit={handleSubmit}>
+                <h1 className={styles.title}>Editar Taller</h1>
                 <label className={styles.label}>Profesional</label>
                 <select
                     className={styles.input}
@@ -92,23 +131,10 @@ const CreateTaller = () => {
                 <input className={styles.input} type="text" name="type" placeholder="Tipo de taller" value={form.type} onChange={handleChange} />
                 <label className={styles.label}>Máximo de participantes</label>
                 <input className={styles.input} type="number" name="maxParticipants" placeholder="Máximo de participantes" value={form.maxParticipants} onChange={handleChange} />
-                <button className={styles.button} type="submit">Crear Taller</button>
+                <button className={styles.button} type="submit">Actualizar Taller</button>
             </form>
-            {message && <div className="mt-6 sm:mx-auto sm:w-full sm:max-w-md border border-red-300 rounded">
-                <div className="bg-red-50 py-3 px-3 sm:px-6 sm:rounded-md sm:px-10">
-                    <p className="text-sm text-gray-600 text-center">{message}</p>
-                </div>
-            </div>}
         </div>
     );
 };
 
-const Talleres = () => {
-    return (
-        <div className={styles.container}>
-            <CreateTaller />
-        </div>
-    );
-};
-
-export default Talleres;
+export default EditTaller;

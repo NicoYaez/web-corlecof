@@ -192,7 +192,7 @@ const AgregarAlumno = () => {
 
             {message && <p>{message}</p>}
 
-            <Link legacyBehavior href="/listtalleres">
+            <Link legacyBehavior href="/talleres/list-talleres">
                 <a className={styles.backButton}>Volver a Listado de Talleres</a>
             </Link>
         </div>

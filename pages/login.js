@@ -87,7 +87,7 @@ const Login = () => {
             });
 
             if (response.status === 200) {
-                router.push('/inicio');
+                router.push('/dashboard/secretary');
             }
 
         } catch (error) {

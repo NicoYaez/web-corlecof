@@ -3,6 +3,7 @@ import PatientList from "@/components/patient/patienList";
 import AppointmentList from "@/components/appointmentList";
 import FormPatient from "@/components/patient/formPatient";
 import ScheduleAppointment from "@/components/scheduleAppointment";
+import { useRouter } from 'next/router';
 const Secretary = () => {
   const api = process.env.NEXT_PUBLIC_API_LINK;
   const [currentView, setCurrentView] = useState('appointments'); // State to control the current view
@@ -12,6 +13,8 @@ const Secretary = () => {
     setShowForm(false);
   };
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const router = useRouter();
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -28,9 +31,9 @@ const Secretary = () => {
         </button>
         <button
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-2"
-          onClick={() => changeView('sportsWorkshop')}
+          onClick={() => router.push('/talleres/list-talleres')}
         >
-          Ver Tallerer
+          Ver Talleres
         </button>
         <button
           className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded ml-2"
@@ -45,13 +48,13 @@ const Secretary = () => {
           Crear Paciente
         </button>
         <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-2"
-          onClick={() => changeView('scheduleAppointment')}>
+          onClick={() => router.push('/cita/agendar')}>
           Agendar Cita
         </button>
       </div>
 
 
-      {isModalOpen && <FormPatient  onClose={() => setIsModalOpen(false)} />}
+      {isModalOpen && <FormPatient onClose={() => setIsModalOpen(false)} />}
       {currentView === 'patients' && <PatientList />}
       {currentView === 'appointments' && <AppointmentList />}
       {currentView === 'scheduleAppointment' && <ScheduleAppointment />}

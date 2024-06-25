@@ -27,8 +27,8 @@ function DatosPersonales({ patient }) {
       {fichaMedica && fichaMedica.paciente ? (
         <div className="mt-2">
           <p className="text-md text-gray-700"><strong>Nombre:</strong> {fichaMedica.paciente.nombre}</p>
-          <p className="text-md text-gray-700"><strong>Apellido:</strong> {fichaMedica.paciente.apellidoPaterno}</p>
-          <p className="text-md text-gray-700"><strong>Edad:</strong> {fichaMedica.edad}</p>
+          <p className="text-md text-gray-700"><strong>Apellido Paterno:</strong> {fichaMedica.paciente.apellidoPaterno}</p>
+          <p className="text-md text-gray-700"><strong>Apellido Materno:</strong> {fichaMedica.paciente.apellidoMaterno}</p>
           <p className="text-md text-gray-700"><strong>Email:</strong> {fichaMedica.paciente.email}</p>
           <p className="text-md text-gray-700"><strong>Edad:</strong> {fichaMedica.edad}</p>
         </div>
