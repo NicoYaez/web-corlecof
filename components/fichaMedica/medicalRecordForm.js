@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import PatientContext from '@/context/PatientContext';
-function MedicalRecordForm({ patient, onClose}) {
+function MedicalRecordForm({ patient, onClose }) {
     const api = process.env.NEXT_PUBLIC_API_LINK;
     const { refreshPatients } = useContext(PatientContext);
 
@@ -71,103 +71,104 @@ function MedicalRecordForm({ patient, onClose}) {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-            <div className="mb-4">
-                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="rut">
-                    Rut:
-                    <input
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        type="text"
-                        name="rut"
-                        id="rut"
-                        value={datosPersonales.rut}
-                        onChange={handleChange}
-                        readOnly={datosPersonales.rut !== ''}
-                        required
-                    />
-                </label>
-                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="nombre">
-                    Nombre:
-                    <input
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        type="text"
-                        name="nombre"
-                        id="nombre"
-                        value={datosPersonales.nombre}
-                        onChange={handleChange}
-                        readOnly={datosPersonales.nombre !== ''}
-                        required
-                    />
-                </label>
-            </div>
-            <div className="mb-4">
-                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="apellidoPaterno">
-                    Apellido Paterno:
-                    <input
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        type="text"
-                        name="apellidoPaterno"
-                        id="apellidoPaterno"
-                        value={datosPersonales.apellidoPaterno}
-                        onChange={handleChange}
-                        readOnly={datosPersonales.apellidoPaterno !== ''}
-                        required
-                    />
-                </label>
-                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="apellidoMaterno">
-                    Apellido Materno:
-                    <input
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        type="text"
-                        name="apellidoMaterno"
-                        id="apellidoMaterno"
-                        value={datosPersonales.apellidoMaterno}
-                        onChange={handleChange}
-                        readOnly={datosPersonales.apellidoMaterno !== ''}
-                        required
-                    />
-                </label>
-                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
-                    Email:
-                    <input
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        type="text"
-                        name="email"
-                        id="email"
-                        value={datosPersonales.email}
-                        onChange={handleChange}
-                        readOnly={datosPersonales.email !== ''}
-                        required
-                    />
-                </label>
-                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="edad">
-                    Edad:
-                    <input
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        type="text"
-                        name="edad"
-                        id="edad"
-                        value={fichaMedica.edad}
-                        onChange={handleChange}
-                        required
-                    />
-                </label>
-            </div>
-            <br />
-            <button
-                type="submit"
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            >
-                Enviar
-            </button>
-            <button
-                onClick={onClose}
-                type="button"
-                className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ml-2"
-            >
-                Cancelar
-            </button>
-        </form>
+
+
+        <div className="text-lg text-gray-700 font-semibold capitalize">
+            <h2 class="text-lg text-gray-700 font-semibold capitalize">Crear Ficha Paciente</h2>
+            <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+                <div>
+                    <label className="text-gray-700" htmlFor="rut">
+                        Rut:
+                        <input
+                            className="form-input w-full mt-2 rounded-md focus:border-indigo-600"
+                            type="text"
+                            name="rut"
+                            id="rut"
+                            value={datosPersonales.rut}
+                            onChange={handleChange}
+                            readOnly={datosPersonales.rut !== ''}
+                            required
+                        />
+                    </label>
+                    <label className="text-gray-700" htmlFor="nombre">
+                        Nombre:
+                        <input
+                            className="form-input w-full mt-2 rounded-md focus:border-indigo-600"
+                            type="text"
+                            name="nombre"
+                            id="nombre"
+                            value={datosPersonales.nombre}
+                            onChange={handleChange}
+                            readOnly={datosPersonales.nombre !== ''}
+                            required
+                        />
+                    </label>
+                </div>
+                <div className="mb-4">
+                    <label className="text-gray-700" htmlFor="apellidoPaterno">
+                        Apellido Paterno:
+                        <input
+                            className="form-input w-full mt-2 rounded-md focus:border-indigo-600"
+                            type="text"
+                            name="apellidoPaterno"
+                            id="apellidoPaterno"
+                            value={datosPersonales.apellidoPaterno}
+                            onChange={handleChange}
+                            readOnly={datosPersonales.apellidoPaterno !== ''}
+                            required
+                        />
+                    </label>
+                    <label className="text-gray-700" htmlFor="apellidoMaterno">
+                        Apellido Materno:
+                        <input
+                            className="form-input w-full mt-2 rounded-md focus:border-indigo-600"
+                            type="text"
+                            name="apellidoMaterno"
+                            id="apellidoMaterno"
+                            value={datosPersonales.apellidoMaterno}
+                            onChange={handleChange}
+                            readOnly={datosPersonales.apellidoMaterno !== ''}
+                            required
+                        />
+                    </label>
+                    <label className="text-gray-700" htmlFor="email">
+                        Email:
+                        <input
+                            className="form-input w-full mt-2 rounded-md focus:border-indigo-600"
+                            type="text"
+                            name="email"
+                            id="email"
+                            value={datosPersonales.email}
+                            onChange={handleChange}
+                            readOnly={datosPersonales.email !== ''}
+                            required
+                        />
+                    </label>
+                    <label className="text-gray-700" htmlFor="edad">
+                        Edad:
+                        <input
+                            className="form-input w-full mt-2 rounded-md focus:border-indigo-600"
+                            type="text"
+                            name="edad"
+                            id="edad"
+                            value={fichaMedica.edad}
+                            onChange={handleChange}
+                            required
+                        />
+                    </label>
+                </div>
+                <div className="flex justify-end mt-4">
+
+                    <button
+                        type="submit"
+                        className="px-4 py-2 bg-gray-800 text-gray-200 rounded-md hover:bg-gray-700 focus:outline-none focus:bg-gray-700"
+                    >
+                        Enviar
+                    </button>
+                </div>
+            </form>
+        </div>
+
     );
 }
 

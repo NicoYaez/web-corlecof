@@ -7,9 +7,12 @@ import { PatientProvider } from '../context/PatientContext';
 
 function MyApp({ Component, pageProps }) {
   return (
+    <div className="bg-blue-300 min-h-screen">
+
     <PatientProvider>
       <Component {...pageProps} />
     </PatientProvider>
+    </div>
   );
 }
 

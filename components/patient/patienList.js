@@ -27,56 +27,66 @@ const PatientList = () => {
   };
 
   return (
-    <div className="overflow-x-auto">
-      <table className="min-w-full">
-        <thead className="bg-gray-200">
-          <tr>
-            <th className="px-2 py-2 sm:px-4 sm:py-2 text-center align-middle">RUT</th>
-            <th className="px-2 py-2 sm:px-4 sm:py-2 text-center align-middle">Nombre</th>
-            <th className="px-2 py-2 sm:px-4 sm:py-2 text-center align-middle">Apellido Paterno</th>
-            <th className="px-2 py-2 sm:px-4 sm:py-2 text-center align-middle">Apellido Materno</th>
-            <th className="px-2 py-2 sm:px-4 sm:py-2 text-center align-middle">Correo Electrónico</th>
-            <th className="px-2 py-2 sm:px-4 sm:py-2 text-center align-middle">Ficha Médica</th>
-            <th className="px-2 py-2 sm:px-4 sm:py-2 text-center align-middle">Edición</th>
-          </tr>
-        </thead>
-        <tbody>
-          {patientsList.map((patient) => (
-            <tr key={patient._id} className="border-b">
-              <td className="px-2 py-2 sm:px-4 sm:py-2 text-center align-middle">{patient.rut}</td>
-              <td className="px-2 py-2 sm:px-4 sm:py-2 text-center align-middle">{patient.nombre}</td>
-              <td className="px-2 py-2 sm:px-4 sm:py-2 text-center align-middle">{patient.apellidoPaterno}</td>
-              <td className="px-2 py-2 sm:px-4 sm:py-2 text-center align-middle">{patient.apellidoMaterno}</td>
-              <td className="px-2 py-2 sm:px-4 sm:py-2 text-center align-middle">{patient.email}</td>
-              <td className="px-2 py-2 sm:px-4 sm:py-2 text-center align-middle">
-                <button
-                  className={`${patient.fichaMedica ? 'bg-green-500' : 'bg-red-500'} text-white py-1 px-2 rounded focus:outline-none`}
-                  onClick={() => handleOpenModal(patient)}
-                >
-                  {patient.fichaMedica ? 'Existe' : 'No Existe'}
-                </button>
-              </td>
-              <td className="text-center">
-                <button onClick={() => handleEditPatient(patient)}><i className="icono-editar">✏️</i></button>
-                <button onClick={() => handleDeletePatient(patient._id)}><i className="icono-eliminar">🗑️</i></button>
-              </td>
+    
+    <div>
+
+    <h3 className="text-gray-700 text-3xl font-medium py-5 text-center">Pacientes Inscritos</h3>
+    
+
+
+    <div className="mt-6">
+      <div className="bg-white shadow rounded-md overflow-hidden my-6">
+        <table className="text-left w-full border-collapse">
+          <thead className="border-b">
+            <tr>
+              <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">RUT</th>
+              <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Nombre</th>
+              <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Apellido Paterno</th>
+              <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Apellido Materno</th>
+              <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Correo Electrónico</th>
+              <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Ficha Médica</th>
+              <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Edición</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-      {isMedicalRecordModalOpen && (
-        <MedicalRecordModal
+          </thead>
+          <tbody>
+            {patientsList.map((patient) => (
+              <tr key={patient._id} className="hover:bg-gray-200">
+                <td className="py-4 px-6 border-b text-gray-500">{patient.rut}</td>
+                <td className="py-4 px-6 border-b text-gray-700 text-lg">{patient.nombre}</td>
+                <td className="py-4 px-6 border-b text-gray-700 text-lg">{patient.apellidoPaterno}</td>
+                <td className="py-4 px-6 border-b text-gray-700 text-lg">{patient.apellidoMaterno}</td>
+                <td className="py-4 px-6 border-b text-gray-700 text-lg">{patient.email}</td>
+                <td className="py-4 px-6 border-b text-gray-700 text-lg">
+                  <span
+                    className={`${patient.fichaMedica ? 'bg-green-100 text-green-800' : 'bg-red-100 text-reed-800'} px-2 inline-flex text-xs leading-5 font-semibold rounded-full cursor-pointer`}
+                    onClick={() => handleOpenModal(patient)}
+                    >
+                    {patient.fichaMedica ? 'Existe' : 'No Existe'}
+                  </span>
+                </td>
+                <td className="text-center">
+                  <button onClick={() => handleEditPatient(patient)}><i className="icono-editar">✏️</i></button>
+                  <button onClick={() => handleDeletePatient(patient._id)}><i className="icono-eliminar">🗑️</i></button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        {isMedicalRecordModalOpen && (
+          <MedicalRecordModal
           patient={selectedPatient}
           onClose={() => setIsMedicalRecordModalOpen(false)}
-        />
-      )}
-      {isEditModalOpen && (
-        <EditPatientModal
+          />
+        )}
+        {isEditModalOpen && (
+          <EditPatientModal
           patient={selectedPatient}
           onClose={() => setIsEditModalOpen(false)}
-        />
-      )}
+          />
+        )}
+      </div>
     </div>
+        </div>
   );
 };
 

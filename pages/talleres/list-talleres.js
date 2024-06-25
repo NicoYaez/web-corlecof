@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
+import styles from '../../styles/ListTalleres.module.css';
 
 const ListTalleres = () => {
     const api = process.env.NEXT_PUBLIC_API_LINK;
@@ -36,54 +37,69 @@ const ListTalleres = () => {
     }
 
     return (
-        <div className="container mx-auto p-4">
-            <Link legacyBehavior href="/talleres/crear-taller">
-                <a className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4 inline-block">
-                    Crear nuevo taller
-                </a>
-            </Link>
-            <h1 className="text-3xl font-bold mb-4">Lista de Talleres</h1>
-            <div className="overflow-x-auto">
-                <table className="min-w-full bg-white border border-gray-300">
-                    <thead className="bg-gray-200">
-                        <tr>
-                            <th className="border border-gray-300 px-4 py-2">Nombre</th>
-                            <th className="border border-gray-300 px-4 py-2">Profesional</th>
-                            <th className="border border-gray-300 px-4 py-2">Inicio</th>
-                            <th className="border border-gray-300 px-4 py-2">Fin</th>
-                            <th className="border border-gray-300 px-4 py-2">Duración (minutos)</th>
-                            <th className="border border-gray-300 px-4 py-2">Descripción</th>
-                            <th className="border border-gray-300 px-4 py-2">Tipo</th>
-                            <th className="border border-gray-300 px-4 py-2">Participantes</th>
-                            <th className="border border-gray-300 px-4 py-2">Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {talleres.map(taller => (
-                            <tr key={taller._id} className="text-center">
-                                <td className="border border-gray-300 px-4 py-2">{taller.name}</td>
-                                <td className="border border-gray-300 px-4 py-2">{taller.profesional}</td>
-                                <td className="border border-gray-300 px-4 py-2">{new Date(taller.startTime).toLocaleString()}</td>
-                                <td className="border border-gray-300 px-4 py-2">{new Date(taller.endTime).toLocaleString()}</td>
-                                <td className="border border-gray-300 px-4 py-2">{taller.duration}</td>
-                                <td className="border border-gray-300 px-4 py-2">{taller.description}</td>
-                                <td className="border border-gray-300 px-4 py-2">{taller.type}</td>
-                                <td className="border border-gray-300 px-4 py-2">{taller.participants.length}/{taller.maxParticipants}</td>
-                                <td className="border border-gray-300 px-4 py-2">
-                                    <div className="space-x-2">
-                                        <Link legacyBehavior href={`/talleres/editar-taller/${taller._id}`}>
-                                            <a className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded">Editar</a>
-                                        </Link>
-                                        <Link legacyBehavior href={`/talleres/agregar?tallerId=${taller._id}`}>
-                                            <a className="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-2 rounded">Agregar Alumno</a>
-                                        </Link>
-                                        <button onClick={() => handleDelete(taller._id)} className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded">Eliminar</button>
-                                    </div>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
+        <div>
+            <div className='mt-8'>
+                <div className='text-center w-full'>
+                    <h1 className="text-gray-600 text-lg">Lista de Talleres</h1>
+                </div>
+                <div className="flex flex-col mt-6">
+                    <div className="align-middle min-w-full  ">
+                        <table className="w-3/4 mx-auto">
+                            <thead>
+                                <tr>
+                                    <th className="px-6 py-3 border-b border-gray-200 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Nombre</th>
+                                    <th className="px-6 py-3 border-b border-gray-200 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Profesional</th>
+                                    <th className="px-6 py-3 border-b border-gray-200 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Inicio Taller</th>
+                                    <th className="px-6 py-3 border-b border-gray-200 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Fin Taller</th>
+                                    <th className="px-6 py-3 border-b border-gray-200 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Duración</th>
+                                    <th className="px-6 py-3 border-b border-gray-200 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Descripcion</th>
+                                    <th className="px-6 py-3 border-b border-gray-200 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Tipo</th>
+                                    <th className="px-6 py-3 border-b border-gray-200 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Participantes</th>
+                                    <th className="px-6 py-3 border-b border-gray-200 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
+                                </tr>
+                            </thead>
+
+                            <tbody className="bg-white">
+                                {talleres.map(taller => (
+                                    <tr key={taller._id}>
+                                        <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">{taller.name}</td>
+                                        <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">{taller.profesional}</td>
+                                        <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">{new Date(taller.startTime).toLocaleString()}</td>
+                                        <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">{new Date(taller.endTime).toLocaleString()}</td>
+                                        <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200"> {taller.duration} minutos</td>
+                                        <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">{taller.description}</td>
+                                        <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">{taller.type}</td>
+                                        <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">{taller.participants.length}/{taller.maxParticipants}</td>
+                                        <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                            <div className="flex flex-row space-x-1">
+                                                <Link legacyBehavior href={`/talleres/editar-taller/${taller._id}`}>
+                                                    <a className="px-6 py-3 bg-green-600 rounded-md text-white font-medium tracking-wide hover:bg-green-500 ml-3">Editar Taller</a>
+                                                </Link>
+                                                <Link legacyBehavior href={`/talleres/agregar?tallerId=${taller._id}`}>
+                                                    <a className="px-6 py-3 bg-green-600 rounded-md text-white font-medium tracking-wide hover:bg-green-500 ml-3">Agregar Alumno</a>
+                                                </Link>
+                                                <button onClick={() => handleDelete(taller._id)} className="px-6 py-3 bg-red-600 rounded-md text-white font-medium tracking-wide hover:bg-red-500 ml-3">Eliminar Taller</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+
+
+
+
+
+                                ))}
+
+                            </tbody>
+                        </table>
+                        <div className='mt-4 text-center py-5'>
+
+                        <Link legacyBehavior href="/talleres/crear-taller">
+                            <a className="px-6 py-3 bg-green-600 rounded-md text-white font-medium tracking-wide hover:bg-green-500 ml-3">Crear nuevo taller</a>
+                        </Link>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     );
