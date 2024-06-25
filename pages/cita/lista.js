@@ -157,7 +157,7 @@ const HomePage = () => {
                                         <td className="border border-gray-300 px-4 py-2">{cita.hora}</td>
                                         <td className="border border-gray-300 px-4 py-2">{cita.paciente.nombre} {cita.paciente.apellidoPaterno}</td>
                                         <td className="border border-gray-300 px-4 py-2">{cita.status}</td>
-                                        <td className="border border-gray-300 px-4 py-2">
+                                        <td className="border border-gray-300 px-4 py-2 flex justify-center items-center space-x-2">
                                             <button
                                                 className="bg-red-500 hover:bg-red-600 text-white px-4 py-1 rounded focus:outline-none"
                                                 onClick={() => handleEliminarCita(cita._id)}
@@ -165,7 +165,7 @@ const HomePage = () => {
                                                 Eliminar
                                             </button>
                                             <button
-                                                className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-1 rounded ml-2 focus:outline-none"
+                                                className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-1 rounded focus:outline-none"
                                                 onClick={() => handleEditarEstadoCita(cita._id)}
                                             >
                                                 Editar Estado

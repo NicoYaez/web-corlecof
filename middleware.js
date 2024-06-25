@@ -15,12 +15,12 @@ export async function middleware(request) {
                 }
             } catch (error) {
                 console.error(error)
-                return NextResponse.redirect(new URL('/login', request.url))            }
+                return NextResponse.redirect(new URL('/auth/login', request.url))            }
         }
-        return NextResponse.redirect(new URL('/login', request.url))
+        return NextResponse.redirect(new URL('/auth/login', request.url))
     }
 
-    if (request.nextUrl.pathname.startsWith('/login')) {
+    if (request.nextUrl.pathname.startsWith('/auth/login')) {
         if (jwt !== undefined) {
             try {
                 const decoded = await jwtVerify(jwt, new TextEncoder().encode(process.env.SECRET_API))
@@ -35,7 +35,7 @@ export async function middleware(request) {
 
                 //Verificar Token
                 if (res.status === 200) {
-                    return NextResponse.redirect(new URL('/inicio', request.url))
+                    return NextResponse.redirect(new URL('/dashboard/secretary', request.url))
                 }
             } catch (error) {
                 console.error(error)
