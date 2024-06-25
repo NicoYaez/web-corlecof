@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useRouter } from 'next/router';
 import styles from '../styles/Taller.module.css';
 
 const CreateTaller = () => {
     const api = process.env.NEXT_PUBLIC_API_LINK;
+    const router = useRouter();
     const [form, setForm] = useState({
         profesional: '',
         startTime: '',
@@ -15,8 +17,21 @@ const CreateTaller = () => {
         type: '',
         maxParticipants: ''
     });
-
     const [message, setMessage] = useState('');
+    const [profesionales, setProfesionales] = useState([]);
+
+    useEffect(() => {
+        const fetchProfesionales = async () => {
+            try {
+                const response = await axios.get(`${api}/user/list/profesionales/Profesor`);
+                setProfesionales(response.data);
+            } catch (error) {
+                console.error('Error fetching profesionales:', error);
+            }
+        };
+
+        fetchProfesionales();
+    }, []);
 
     const handleChange = (e) => {
         setForm({
@@ -37,6 +52,8 @@ const CreateTaller = () => {
             const data = res.data;
             console.log('Taller creado:', data);
             setMessage('Taller creado correctamente');
+
+            router.push('/listtalleres');
         } catch (error) {
             console.error(error.message);
             setMessage('Error al crear el taller');
@@ -48,7 +65,19 @@ const CreateTaller = () => {
             <h1 className={styles.title}>Crear Taller</h1>
             <form className={styles.form} onSubmit={handleSubmit}>
                 <label className={styles.label}>Profesional</label>
-                <input className={styles.input} type="text" name="profesional" placeholder="Profesional" value={form.profesional} onChange={handleChange} />
+                <select
+                    className={styles.input}
+                    name="profesional"
+                    value={form.profesional}
+                    onChange={handleChange}
+                >
+                    <option value="">Selecciona un profesional</option>
+                    {profesionales.map((profesional) => (
+                        <option key={profesional.id} value={profesional.id}>
+                            {profesional.name}
+                        </option>
+                    ))}
+                </select>
                 <label className={styles.label}>Fecha de inicio</label>
                 <input className={styles.input} type="datetime-local" name="startTime" placeholder="Fecha de inicio" value={form.startTime} onChange={handleChange} />
                 <label className={styles.label}>Fecha de término</label>
@@ -83,5 +112,3 @@ const Talleres = () => {
 };
 
 export default Talleres;
-
-

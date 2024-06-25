@@ -1,5 +1,4 @@
-// Importa los módulos necesarios
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import styles from '../../styles/EditTaller.module.css'; // Importa los estilos CSS
@@ -21,6 +20,7 @@ const EditTaller = () => {
         type: '',
         maxParticipants: ''
     });
+    const [profesionales, setProfesionales] = useState([]);
 
     useEffect(() => {
         const fetchTaller = async () => {
@@ -46,9 +46,20 @@ const EditTaller = () => {
             }
         };
 
+        const fetchProfesionales = async () => {
+            try {
+                const response = await axios.get(`${api}/user/list/profesionales/Profesor`);
+                setProfesionales(response.data);
+            } catch (error) {
+                console.error('Error fetching profesionales:', error);
+            }
+        };
+
         if (tallerId) {
             fetchTaller();
         }
+
+        fetchProfesionales(); // Obtener la lista de profesionales al cargar el componente
     }, [api, tallerId]);
 
     const handleChange = (e) => {
@@ -71,7 +82,7 @@ const EditTaller = () => {
         try {
             const res = await axios.put(`${api}/taller/${tallerId}`, form);
             console.log('Taller actualizado:', res.data);
-            // Opcionalmente, podrías redirigir o mostrar un mensaje de éxito aquí
+            router.push('/listtalleres'); // Redirigir a listtalleres.js después de la actualización
         } catch (error) {
             if (error.response) {
                 console.error('Error de servidor:', error.response.status, error.response.data);
@@ -93,7 +104,19 @@ const EditTaller = () => {
             <form className={styles.form} onSubmit={handleSubmit}>
                 <h1 className={styles.title}>Editar Taller</h1>
                 <label className={styles.label}>Profesional</label>
-                <input className={styles.input} type="text" name="profesional" placeholder="Profesional" value={form.profesional} onChange={handleChange} />
+                <select
+                    className={styles.input}
+                    name="profesional"
+                    value={form.profesional}
+                    onChange={handleChange}
+                >
+                    <option value="">Selecciona un profesional</option>
+                    {profesionales.map((profesional) => (
+                        <option key={profesional.id} value={profesional.id}>
+                            {profesional.name}
+                        </option>
+                    ))}
+                </select>
                 <label className={styles.label}>Fecha de inicio</label>
                 <input className={styles.input} type="datetime-local" name="startTime" placeholder="Fecha de inicio" value={form.startTime} onChange={handleChange} />
                 <label className={styles.label}>Fecha de término</label>

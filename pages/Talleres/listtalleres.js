@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
-import styles from '../styles/ListTalleres.module.css';
+import styles from '../../styles/ListTalleres.module.css';
 
 const ListTalleres = () => {
     const api = process.env.NEXT_PUBLIC_API_LINK;
