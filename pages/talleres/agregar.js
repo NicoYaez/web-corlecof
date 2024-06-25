@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import Link from 'next/link';
-import styles from '../../styles/Agregar.module.css';
 
 const AgregarAlumno = () => {
     const router = useRouter();
@@ -113,11 +112,11 @@ const AgregarAlumno = () => {
     };
 
     if (loading || loadingUsuarios) {
-        return <div>Cargando...</div>;
+        return <div className="container mx-auto">Cargando...</div>;
     }
 
     if (!taller) {
-        return <div>No se encontró el taller.</div>;
+        return <div className="container mx-auto">No se encontró el taller.</div>;
     }
 
     const usuariosDisponibles = filteredUsuarios.filter(usuario =>
@@ -125,75 +124,77 @@ const AgregarAlumno = () => {
     );
 
     return (
-        <div className={styles.container}>
-            <h1 className={styles.title}>Gestión de Taller: {taller.name}</h1>
-            <p className={styles.info}>Profesional: {taller.profesional}</p>
-            <p className={styles.info}>Inicio: {new Date(taller.startTime).toLocaleString()}</p>
-            <p className={styles.info}>Fin: {new Date(taller.endTime).toLocaleString()}</p>
-            <p className={styles.info}>Duración: {taller.duration} minutos</p>
-            <p className={styles.info}>Descripción: {taller.description}</p>
-            <p className={styles.info}>Tipo: {taller.type}</p>
-            <p className={styles.info}>Participantes: {taller.participants.length}/{taller.maxParticipants}</p>
+        <div className="container mx-auto p-4">
+            <h1 className="text-3xl font-bold mb-4">Gestión de Taller: {taller.name}</h1>
+            <p className="mb-2"><span className="font-semibold">Profesional:</span> {taller.profesional}</p>
+            <p className="mb-2"><span className="font-semibold">Inicio:</span> {new Date(taller.startTime).toLocaleString()}</p>
+            <p className="mb-2"><span className="font-semibold">Fin:</span> {new Date(taller.endTime).toLocaleString()}</p>
+            <p className="mb-2"><span className="font-semibold">Duración:</span> {taller.duration} minutos</p>
+            <p className="mb-2"><span className="font-semibold">Descripción:</span> {taller.description}</p>
+            <p className="mb-2"><span className="font-semibold">Tipo:</span> {taller.type}</p>
+            <p className="mb-4"><span className="font-semibold">Participantes:</span> {taller.participants.length}/{taller.maxParticipants}</p>
 
-            <div>
-                <h2 className={styles.title}>Participantes Registrados</h2>
+            <div className="mb-4">
+                <h2 className="text-xl font-bold mb-2">Participantes Registrados</h2>
                 {taller.participants.length > 0 ? (
-                    <ul className={styles.userList}>
+                    <ul>
                         {taller.participants.map(participant => (
-                            <li key={participant.rut} className={styles.userListItem}>
-                                {participant.nombre} {participant.apellidoPaterno} {participant.apellidoMaterno} ({participant.rut})
-                                <button className={styles.removeButton} onClick={() => handleEliminar(participant.rut)}>Eliminar</button>
+                            <li key={participant.rut} className="flex items-center justify-between mb-2">
+                                <span>{participant.nombre} {participant.apellidoPaterno} {participant.apellidoMaterno} ({participant.rut})</span>
+                                <button onClick={() => handleEliminar(participant.rut)} className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded">Eliminar</button>
                             </li>
                         ))}
                     </ul>
                 ) : (
-                    <p className={styles.info}>No hay participantes registrados.</p>
+                    <p className="italic">No hay participantes registrados.</p>
                 )}
             </div>
 
-            <div>
-                <button className={styles.submitButton} onClick={handleAddParticipants}>
+            <div className="mb-4">
+                <button onClick={handleAddParticipants} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-2">
                     {showAvailableUsers ? 'Ocultar Usuarios Disponibles' : 'Mostrar Usuarios Disponibles'}
                 </button>
                 {showAvailableUsers && (
-                    <>
+                    <div>
                         <input
                             type="text"
                             placeholder="Buscar por RUT"
                             value={searchTerm}
                             onChange={handleSearchChange}
-                            className={styles.searchInput}
+                            className="border border-gray-300 rounded px-3 py-2 mb-2"
                         />
-                        <ul className={styles.userList}>
+                        <ul>
                             {usuariosDisponibles.map(usuario => (
-                                <li key={usuario.rut} className={styles.userListItem}>
-                                    {usuario.nombre} {usuario.apellidoPaterno} {usuario.apellidoMaterno} ({usuario.rut})
-                                    <button className={styles.addButton} onClick={() => handleAddParticipant(usuario.rut)}>Agregar</button>
+                                <li key={usuario.rut} className="flex items-center justify-between mb-2">
+                                    <span>{usuario.nombre} {usuario.apellidoPaterno} {usuario.apellidoMaterno} ({usuario.rut})</span>
+                                    <button onClick={() => handleAddParticipant(usuario.rut)} className="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-2 rounded">Agregar</button>
                                 </li>
                             ))}
                         </ul>
-                    </>
+                    </div>
                 )}
             </div>
 
-            <div>
-                <ul className={styles.selectedList}>
+            <div className="mb-4">
+                <ul>
                     {pacientesRUT.map(rut => (
-                        <li key={rut} className={styles.selectedListItem}>
-                            {rut}
-                            <button className={styles.removeButton} onClick={() => handleRemoveParticipant(rut)}>Eliminar</button>
+                        <li key={rut} className="flex items-center justify-between mb-2">
+                            <span>{rut}</span>
+                            <button onClick={() => handleRemoveParticipant(rut)} className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded">Eliminar</button>
                         </li>
                     ))}
                 </ul>
                 {showAvailableUsers && (
-                    <button className={styles.confirmButton} onClick={handleConfirmAddParticipants}>Confirmar Participantes</button>
+                    <button onClick={handleConfirmAddParticipants} className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-2">
+                        Confirmar Participantes
+                    </button>
                 )}
             </div>
 
-            {message && <p>{message}</p>}
+            {message && <p className="text-red-500">{message}</p>}
 
             <Link legacyBehavior href="/talleres/list-talleres">
-                <a className={styles.backButton}>Volver a Listado de Talleres</a>
+                <a className="text-blue-500 hover:underline">Volver a Listado de Talleres</a>
             </Link>
         </div>
     );
