@@ -27,18 +27,18 @@ Abre [http://localhost:3000](http://localhost:3000) en tu navegador para ver la 
 
 ## Rutas Web
 
-http://localhost:300/auth/login
-http://localhost:3000/auth/forgot-password
+`http://localhost:300/auth/login`
+`http://localhost:3000/auth/forgot-password`
 
-http://localhost:3000/dashboard/secretary
+`http://localhost:3000/dashboard/secretary`
 
-http://localhost:3000/talleres/list-talleres
-http://localhost:3000/talleres/crear-taller
-http://localhost:3000/talleres/editar-taller/:id
-http://localhost:3000/talleres/agregar?tallerId=:id
+`http://localhost:3000/talleres/list-talleres`
+`http://localhost:3000/talleres/crear-taller`
+`http://localhost:3000/talleres/editar-taller/:id`
+`http://localhost:3000/talleres/agregar?tallerId=:id`
 
-http://localhost:3000/cita/agendar
-http://localhost:3000/cita/lista
+`http://localhost:3000/cita/agendar`
+`http://localhost:3000/cita/lista`
 
-http://localhost:3000/profesional/register
-http://localhost:3000/auth/register
+`http://localhost:3000/profesional/register`
+`http://localhost:3000/auth/register`
