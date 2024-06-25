@@ -1,6 +1,6 @@
 /* Añadido para el fondo de la página */
 .container {
-    background-color: #e0f7fa; /* Azul celeste suave */
+    background-color: #08a6d6; /* Azul celeste suave */
     min-height: 100vh; /* Para asegurar que cubre toda la altura de la ventana */
     display: flex;
     justify-content: center;

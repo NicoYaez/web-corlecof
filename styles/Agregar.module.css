@@ -1,22 +1,50 @@
-/* ../styles/Agregar.module.css */
-
 .container {
-    background-color: #3498db; /* Color de fondo azul */
-    padding: 20px;
-    border-radius: 8px;
-    color: #fff; /* Texto blanco */
-    max-width: 600px;
+    max-width: 800px;
     margin: 0 auto;
+    padding: 20px;
+    background-color: #f2f2f2;
+    border: 1px solid #ccc;
+    border-radius: 8px;
 }
 
 .title {
-    font-size: 24px;
+    font-size: 1.5rem;
     margin-bottom: 10px;
 }
 
 .info {
-    font-size: 18px;
     margin-bottom: 5px;
+}
+
+.backButton {
+    display: block;
+    margin-top: 20px;
+    padding: 8px 16px;
+    background-color: #0070f3;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.backButton:hover {
+    background-color: #0056b3;
+}
+
+.section {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.participants {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.available-users {
+    flex: 1;
+    margin-left: 20px;
 }
 
 .userList {
@@ -25,63 +53,68 @@
 }
 
 .userListItem {
-    margin-bottom: 10px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-}
-
-.addButton,
-.removeButton,
-.submitButton,
-.confirmButton {
-    background-color: #ffffff; /* Color de fondo blanco para botones */
-    color: #3498db; /* Texto azul */
-    border: none;
-    padding: 8px 12px;
-    cursor: pointer;
-    border-radius: 4px;
-    font-size: 14px;
-    transition: background-color 0.3s ease;
-}
-
-.addButton:hover,
-.removeButton:hover,
-.submitButton:hover,
-.confirmButton:hover {
-    background-color: #f0f0f0; /* Color de fondo gris claro al hacer hover */
-}
-
-.participantInput {
-    width: calc(100% - 24px); /* Ajustar el ancho para que no se superponga con los botones */
+    justify-content: space-between;
     padding: 8px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
+    background-color: #fff;
     border: 1px solid #ccc;
     border-radius: 4px;
-    font-size: 14px;
-    color: #333; /* Texto gris oscuro */
-}
-
-.participantInput:focus {
-    outline: none;
-    border-color: #3498db; /* Color de borde azul al tener foco */
-}
-
-.submitButton {
-    margin-right: 10px;
-}
-
-.confirmButton {
-    background-color: #27ae60; /* Color de fondo verde para confirmar */
-    color: #fff; /* Texto blanco */
-}
-
-.confirmButton:hover {
-    background-color: #219e54; /* Color de fondo verde más oscuro al hacer hover */
 }
 
 .addButton,
 .removeButton {
-    flex-shrink: 0;
-    margin-left: 10px;
+    padding: 4px 8px;
+    background-color: #0070f3;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.addButton:hover,
+.removeButton:hover {
+    background-color: #0056b3;
+}
+
+.selectedList {
+    list-style: none;
+    padding: 0;
+}
+
+.selectedListItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px;
+    margin-bottom: 5px;
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    border-radius: 4px;
+}
+
+.confirmButton {
+    margin-top: 10px;
+    padding: 8px 16px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.submitButton {
+    padding: 8px 16px;
+    background-color: #28a745; /* Verde */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.submitButton:hover {
+    background-color: #218838; /* Verde más oscuro al hacer hover */
+}
+.confirmButton:hover {
+    background-color: #218838;
 }

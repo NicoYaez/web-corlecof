@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
+import Link from 'next/link';
 import styles from '../styles/Agregar.module.css';
 
 const AgregarAlumno = () => {
@@ -13,6 +14,8 @@ const AgregarAlumno = () => {
     const [usuarios, setUsuarios] = useState([]);
     const [loadingUsuarios, setLoadingUsuarios] = useState(true);
     const [showAvailableUsers, setShowAvailableUsers] = useState(false);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [filteredUsuarios, setFilteredUsuarios] = useState([]);
     const [message, setMessage] = useState('');
 
     useEffect(() => {
@@ -52,28 +55,29 @@ const AgregarAlumno = () => {
     }, []);
 
     const handleAddParticipants = () => {
-        setShowAvailableUsers(true);
+        setShowAvailableUsers(!showAvailableUsers);
+        if (!showAvailableUsers) {
+            setFilteredUsuarios(usuarios);
+        }
     };
 
-    const handleAddParticipant = (usuarioId) => {
-        setPacientesRUT(prevIds => [...prevIds, usuarioId]);
-        console.log('Participant IDs:', [...pacientesRUT, usuarioId]);
+    const handleAddParticipant = (usuarioRUT) => {
+        setPacientesRUT(prevRUTs => [...prevRUTs, usuarioRUT]);
+        console.log('Participant RUTs:', [...pacientesRUT, usuarioRUT]);
     };
 
     const handleConfirmAddParticipants = async () => {
         try {
-            console.log('Sending participant IDs:', pacientesRUT);
+            console.log('Sending participant RUTs:', pacientesRUT);
             const response = await axios.put(`${api}/taller/${tallerId}/assign-participants`, {
                 pacientesRUT
             });
             console.log('Participantes agregados al taller:', response.data);
 
-            // Actualizar la lista de participantes después de agregarlos
             const updatedTaller = await axios.get(`${api}/taller/${tallerId}`);
             console.log('Taller actualizado:', updatedTaller.data);
             setTaller(updatedTaller.data);
 
-            // Limpiar los IDs de participantes después de confirmar
             setPacientesRUT([]);
             setShowAvailableUsers(false);
         } catch (error) {
@@ -86,15 +90,26 @@ const AgregarAlumno = () => {
             const response = await axios.delete(`${api}/taller/${tallerId}/remove-paciente`, {
                 data: { pacienteRUT }
             });
-            setMessage(`Paciente eliminado exitosamente`);
 
-            // Actualizar la lista de participantes después de eliminar
             const updatedTaller = await axios.get(`${api}/taller/${tallerId}`);
             console.log('Taller actualizado:', updatedTaller.data);
             setTaller(updatedTaller.data);
         } catch (error) {
             setMessage(`Error al eliminar paciente: ${error.response?.data?.message || error.message}`);
         }
+    };
+
+    const handleRemoveParticipant = (rut) => {
+        setPacientesRUT(prevRUTs => prevRUTs.filter(item => item !== rut));
+    };
+
+    const handleSearchChange = (event) => {
+        const value = event.target.value;
+        setSearchTerm(value);
+        const filtered = usuarios.filter(usuario =>
+            usuario.rut.includes(value)
+        );
+        setFilteredUsuarios(filtered);
     };
 
     if (loading || loadingUsuarios) {
@@ -105,9 +120,8 @@ const AgregarAlumno = () => {
         return <div>No se encontró el taller.</div>;
     }
 
-    // Filtrar usuarios disponibles que no están inscritos en el taller
-    const usuariosDisponibles = usuarios.filter(usuario =>
-        !taller.participants.some(participant => participant._id === usuario._id)
+    const usuariosDisponibles = filteredUsuarios.filter(usuario =>
+        !taller.participants.some(participant => participant.rut === usuario.rut)
     );
 
     return (
@@ -126,8 +140,8 @@ const AgregarAlumno = () => {
                 {taller.participants.length > 0 ? (
                     <ul className={styles.userList}>
                         {taller.participants.map(participant => (
-                            <li key={participant._id} className={styles.userListItem}>
-                                {participant.name} ({participant.rut})
+                            <li key={participant.rut} className={styles.userListItem}>
+                                {participant.nombre} {participant.apellidoPaterno} {participant.apellidoMaterno} ({participant.rut})
                                 <button className={styles.removeButton} onClick={() => handleEliminar(participant.rut)}>Eliminar</button>
                             </li>
                         ))}
@@ -137,34 +151,50 @@ const AgregarAlumno = () => {
                 )}
             </div>
 
-            {showAvailableUsers && (
-                <div>
-                    <h2 className={styles.title}>Lista de Usuarios Disponibles</h2>
-                    <ul className={styles.userList}>
-                        {usuariosDisponibles.map(usuario => (
-                            <li key={usuario._id} className={styles.userListItem}>
-                                {usuario.name} ({usuario.rut})
-                                <button className={styles.addButton} onClick={() => handleAddParticipant(usuario.rut)}>Agregar</button>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            )}
+            <div>
+                <button className={styles.submitButton} onClick={handleAddParticipants}>
+                    {showAvailableUsers ? 'Ocultar Usuarios Disponibles' : 'Mostrar Usuarios Disponibles'}
+                </button>
+                {showAvailableUsers && (
+                    <>
+                        <input
+                            type="text"
+                            placeholder="Buscar por RUT"
+                            value={searchTerm}
+                            onChange={handleSearchChange}
+                            className={styles.searchInput}
+                        />
+                        <ul className={styles.userList}>
+                            {usuariosDisponibles.map(usuario => (
+                                <li key={usuario.rut} className={styles.userListItem}>
+                                    {usuario.nombre} {usuario.apellidoPaterno} {usuario.apellidoMaterno} ({usuario.rut})
+                                    <button className={styles.addButton} onClick={() => handleAddParticipant(usuario.rut)}>Agregar</button>
+                                </li>
+                            ))}
+                        </ul>
+                    </>
+                )}
+            </div>
 
             <div>
-                <input
-                    type="text"
-                    value={pacientesRUT.join(',')}
-                    readOnly
-                    className={styles.participantInput}
-                />
-                <button className={styles.submitButton} onClick={handleAddParticipants}>Mostrar Usuarios Disponibles</button>
+                <ul className={styles.selectedList}>
+                    {pacientesRUT.map(rut => (
+                        <li key={rut} className={styles.selectedListItem}>
+                            {rut}
+                            <button className={styles.removeButton} onClick={() => handleRemoveParticipant(rut)}>Eliminar</button>
+                        </li>
+                    ))}
+                </ul>
                 {showAvailableUsers && (
                     <button className={styles.confirmButton} onClick={handleConfirmAddParticipants}>Confirmar Participantes</button>
                 )}
             </div>
 
             {message && <p>{message}</p>}
+
+            <Link legacyBehavior href="/listtalleres">
+                <a className={styles.backButton}>Volver a Listado de Talleres</a>
+            </Link>
         </div>
     );
 };
