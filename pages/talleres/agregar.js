@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import Link from 'next/link';
-import styles from '../styles/Agregar.module.css';
+import styles from '../../styles/Agregar.module.css';
 
 const AgregarAlumno = () => {
     const router = useRouter();
@@ -192,7 +192,7 @@ const AgregarAlumno = () => {
 
             {message && <p>{message}</p>}
 
-            <Link legacyBehavior href="/listtalleres">
+            <Link legacyBehavior href="/talleres/list-talleres">
                 <a className={styles.backButton}>Volver a Listado de Talleres</a>
             </Link>
         </div>

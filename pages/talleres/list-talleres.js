@@ -38,7 +38,7 @@ const ListTalleres = () => {
 
     return (
         <div className={styles.container}>
-            <Link legacyBehavior href="/crear-taller">
+            <Link legacyBehavior href="/talleres/crear-taller">
                 <a className={styles.createButton}>Crear nuevo taller</a>
             </Link>
             <h1>Lista de Talleres</h1>
@@ -54,10 +54,10 @@ const ListTalleres = () => {
                         <p>Tipo: {taller.type}</p>
                         <p>Participantes: {taller.participants.length}/{taller.maxParticipants}</p>
                         <div className={styles.buttonContainer}>
-                            <Link legacyBehavior href={`/editar-taller/${taller._id}`}>
+                            <Link legacyBehavior href={`/talleres/editar-taller/${taller._id}`}>
                                 <a>Editar Taller</a>
                             </Link>
-                            <Link legacyBehavior href={`/agregar?tallerId=${taller._id}`}>
+                            <Link legacyBehavior href={`/talleres/agregar?tallerId=${taller._id}`}>
                                 <a className={styles.button}>Agregar Alumno</a>
                             </Link>
                             <button onClick={() => handleDelete(taller._id)} className={styles.deleteButton}>Eliminar Taller</button>
