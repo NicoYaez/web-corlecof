@@ -38,7 +38,7 @@ const Secretary = () => {
         </button>
         <button
           className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded ml-2"
-          onClick={() => changeView('appointments')}
+          onClick={() => router.push('/cita/lista')}
           >
           Ver Citas
         </button>
