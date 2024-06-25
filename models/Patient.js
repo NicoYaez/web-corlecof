@@ -1,21 +1,21 @@
 import User from './User';
 export default class Patient extends User {
     #medicalRecord;
-    constructor(rut = '', name = '', lastName='', middleName='', email = '') {
-        super(rut, name, lastName, middleName,email);
+    constructor(id= '', rut = '', name = '', lastName='', middleName='', email = '') {
+        super(id, rut, name, lastName, middleName,email);
         this.#medicalRecord = null;
        
     }
 
     // Getter
-    get medicalRecord() {
+    getMedicalRecord() {
         return this.#medicalRecord;
     }
 
     
 
     // Setter
-    set medicalRecord(value) {
+    setmedicalRecord(value) {
         this.#medicalRecord = value;
     }
 }

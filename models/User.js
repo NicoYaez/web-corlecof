@@ -4,14 +4,22 @@ export default class User {
     #email;
     #lastName;
     #middleName;
-    
+    #id
 
-    constructor(rut = '', name = '', lastName='', middleName='', email = '') {
+    constructor(id, rut = '', name = '', lastName='', middleName='', email = '') {
+        this.#id = id;
         this.#rut = rut;
         this.#name = name;
         this.#lastName = lastName;
         this.#middleName = middleName;
         this.#email = email;
+    }
+
+    getId() {
+        return this.#id;
+    }
+    setId(value) {
+        this.#id = value;
     }
 
     getRut() {

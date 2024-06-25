@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import PatientList from "@/components/patienList";
+import PatientList from "@/components/patient/patienList";
 import AppointmentList from "@/components/appointmentList";
-import FormPatient from "@/components/formPatient";
-import Patient from "@/models/Patient";
-import MedicalAppointment from "@/models/MedicalAppointment";
+import FormPatient from "@/components/patient/formPatient";
 import ScheduleAppointment from "@/components/scheduleAppointment";
+<<<<<<< HEAD
 import axios from 'axios';
 
 const Secretary = () => {
@@ -29,11 +28,19 @@ const Secretary = () => {
 
   }, []); // El array vacío asegura que esto se ejecute solo una vez al montar el componente
 
+=======
+const Secretary = () => {
+  const api = process.env.NEXT_PUBLIC_API_LINK;
+  const [currentView, setCurrentView] = useState('appointments'); // State to control the current view
+  const [showForm, setShowForm] = useState(false); // State to control form visibility
+>>>>>>> 2d76b9d5460e95b3ae19709e3b00a68dd550e8bb
   const changeView = (view) => {
     setCurrentView(view);
     setShowForm(false);
   };
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
+<<<<<<< HEAD
   const createPatient = (newPatient) => {
     setPatients([...patients, newPatient]);
     setShowForm(false);
@@ -41,6 +48,10 @@ const Secretary = () => {
 
   const toggleForm = () => {
     setShowForm(!showForm);
+=======
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+>>>>>>> 2d76b9d5460e95b3ae19709e3b00a68dd550e8bb
   };
 
   return (
@@ -66,7 +77,7 @@ const Secretary = () => {
         </button>
         <button
           className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded ml-2"
-          onClick={toggleForm}
+          onClick={() => handleOpenModal()}
         >
           Crear Paciente
         </button>
@@ -76,14 +87,10 @@ const Secretary = () => {
         </button>
       </div>
 
-      {showForm && (
-        <div className="mt-4">
-          <FormPatient createPatient={createPatient} />
-        </div>
-      )}
 
-      {currentView === 'patients' && <PatientList patients={patients} />}
-      {currentView === 'appointments' && <AppointmentList appointments={appointments} />}
+      {isModalOpen && <FormPatient  onClose={() => setIsModalOpen(false)} />}
+      {currentView === 'patients' && <PatientList />}
+      {currentView === 'appointments' && <AppointmentList />}
       {currentView === 'scheduleAppointment' && <ScheduleAppointment />}
     </div>
   );
